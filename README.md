@@ -138,6 +138,24 @@ cp -r .claude/agents/ your-project/.claude/agents/
     └── M13-create.md       # Execution: Create (创)
 ```
 
+## Contributors
+
+- **[MengJianL](https://github.com/MengJianL)** — Architecture design, atom specifications, governance framework
+- **[Claude](https://claude.ai)** (Anthropic) — Architecture co-design, documentation, implementation
+- **[ChatGPT](https://chatgpt.com)** (OpenAI) — Architecture co-design, documentation, implementation
+
+## Acknowledgments
+
+Special thanks to **[KimYx0207](https://github.com/KimYx0207)** for invaluable contributions and support throughout the development of this project.
+
+## References
+
+> 孟健, 金仲旭. *基于"组织镜像"理论的AI智能体多Agent协作架构设计*. Zenodo, 2025.
+>
+> Meng Jian, Jin Zhongxu. *AI Agent Multi-Agent Collaboration Architecture Design Based on "Organizational Mirroring" Theory*. Zenodo, 2025.
+
+- **DOI**: [https://zenodo.org/records/18957649](https://zenodo.org/records/18957649)
+
 ## License
 
 MIT
