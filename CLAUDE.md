@@ -20,74 +20,71 @@ Layer 1 (Foundation) : M01-memory  M02-identity  M03-channel
 - **Orchestration** coordinates, routes, evaluates, and sequences
 - **Execution** performs atomic operations: compose, retrieve, invoke, verify, create
 
-Detailed architecture index: `.claude/agents/CLAUDE.md`
-
-## Key Conventions
-
-- **Agent file naming**: `M##-[name].md` (e.g., `M04-decompose.md`)
-- **Agent file structure**: each file follows a 16-section template — Layer → Identity → Existential Role → Core Function → Operational Boundary → Trigger Conditions → Working Modes → Input Contract → Output Contract → Decision Principles → Failure Modes → Quality Criteria → Neighbor Interaction → Runtime Binding → Self-Evolution → Minimal Governance Statement. Some atoms include optional Special Protocols (e.g., Escalation Ladder in M08, Human Channel Protocol in M03, Capability Gap Protocol in M05).
-- **Quality scale**: 0–5 per dimension (Accuracy, Completeness, Actionability, Format), 16/20 passing threshold
-- **Language**: bilingual Chinese/English documentation
-- **All descriptions are pure-abstract** — no domain-specific vocabulary, to ensure cross-domain reusability
+Detailed architecture index (五类关系网络, 五条核心链路, 两条治理闭环, Agent 团队运转模型, 项目 Agent 体系, Claude Code 运行绑定, Skill 融合映射, Agent 创建机制, 设计原则, 统一术语约束): **`.claude/agents/CLAUDE.md`**
 
 ## Commands
 
 | Command | Purpose |
 |---|---|
-| `/meta <task>` | 元部门为项目创造 Agent：分析→检查/创造项目 Agent→按 Agent 定义执行→核验→评估→交付 |
+| `/meta <task>` | 元部门为项目创造 Agent：意图放大→分析→检查/创造项目 Agent→按 Agent 定义执行→核验→评估→交付 |
 
 Defined in `.claude/commands/meta.md`.
 
-## Skill Integration
-
-| External Skill | Integrated Into | Purpose |
-|---|---|---|
-| `find-skill` | M05 (Route) + M10 (Retrieve) | Discover reusable patterns when capability gaps detected |
-| `skill-create` | M13 (Create) | Package validated new patterns into reusable skill modules |
-| `awesome-claude-prompts` | M09 (Compose) + M02 (Identity) + M10 (Retrieve) | Prompt frameworks for composition, identity methodology, template library |
-
-## Runtime Binding: Claude Code Environment
+## Critical Rules (Runtime Binding)
 
 **Core principle: the Meta-Department is a "tool that creates tools" (创造工具的工具). Its primary output is Project Agent definitions (stored in `agents/`), not work deliverables.**
 
-When operating within Claude Code CLI, abstract atom operations bind to concrete tools:
+1. **三权分立** — Execution Agent, Verify Agent (M12), and Evaluate Agent (M06) must be separate `Agent` instances with fully isolated context. No exceptions.
+2. **Agent delegation is mandatory** — All non-micro tasks must use independent `Agent` tool instances. Micro requires ALL THREE: (1) single clear operation, no decomposition needed; (2) ≤1 file, ≤10 lines; (3) no verification needed. Any doubt → upgrade to standard mode.
+3. **Reuse before create** — M05 must check project `agents/` for existing Agent definitions before creating new ones. If no match found, search global resources (`.claude/skills/`, `.claude/agents/`, `references/` SKILL.md files) for directly invokable Skills/Agents before creating new project Agents.
+4. **Parallelism** — Independent sub-tasks must be dispatched in parallel (max 5 Agent instances per batch). > 5 → split into batches with convergence checkpoints.
+5. **先读后派** — Before dispatching Agents, read `.claude/agents/CLAUDE.md` (architecture index) and the relevant atom definitions.
+6. **Phase gate-checks** — `/meta` enforces hard gate-checks between phases. Standard/heavy tasks are forbidden from entering Phase C (execution) without first completing Phase B (creating/reusing project Agent definitions in `agents/`). See `meta.md` for the full ⛔ gate-check system.
 
-| Atom Concept | Claude Code Implementation |
-|---|---|
-| M04 标准/重量模式执行 | **Must** use `Agent` tool to create independent sub-task executors |
-| M05 路由至执行实体 | **Must** first check project `agents/` for existing Agent definitions; reuse if matched, create new if not |
-| M06 独立评估 | **Must** use a separate `Agent` instance, NO shared context with executor. No exceptions. |
-| M07 综合 (>3 sources) | **Must** delegate to independent `Agent` for context isolation |
-| M08 并行执行 | Spawn multiple `Agent` tool calls in a single message (max 5 per batch) |
-| M09 非微型生成 | **Must** use independent `Agent` for all non-trivial composition tasks |
-| M10 跨源检索 (≥2 sources) | **Must** delegate to independent `Agent` for cross-source retrieval |
-| M11 非微型调用 | **Must** use independent `Agent` for external system/API invocations |
-| M12 独立核验 | Verifier **must never** share execution context with producer (regardless of how production happened) |
-| M13 项目 Agent 创造 | Standard output — create Agent definition files in project `agents/`; Skill/Agent/Meta-Dept levels require independent `Agent` |
+Full runtime binding table: `.claude/agents/CLAUDE.md` § 八
 
-**Project Agent output**: Every `/meta` invocation creates or reuses Agent definition files in the project's `agents/` directory. These are the Meta-Department's primary deliverables — reusable tools, not work products.
+## Atom File Conventions
 
-**Single-entity execution is only permitted for "micro" tasks** (single clear operation, ≤1 file, ≤10 lines changed, no verification needed). Any doubt → upgrade to standard mode with Agent team.
-
-**Parallelism cap**: Max 5 concurrent Agent instances per batch. If > 5 parallel tasks exist, split into batches with convergence checkpoints between them.
+- **Naming**: `M##-[name].md` (e.g., `M04-decompose.md`)
+- **16-section template** (do not remove or reorder sections): Layer → Identity → Existential Role → Core Function → Operational Boundary → Trigger Conditions → Working Modes → Input Contract → Output Contract → Decision Principles → Failure Modes → Quality Criteria → Neighbor Interaction → Runtime Binding → Self-Evolution → Minimal Governance Statement
+- Optional Special Protocols: Escalation Ladder (M08), Human Channel Protocol (M03), Capability Gap Protocol (M05)
+- **Quality scale**: 0–5 per dimension (Accuracy, Completeness, Actionability, Format), 16/20 passing threshold
+- **Language**: bilingual Chinese/English
+- **Pure-abstract** — no domain-specific vocabulary, to ensure cross-domain reusability
 
 ## Project Agent System
 
-The Meta-Department's core output is **Project Agent definitions** — standardized `.md` files stored in the project's `agents/` directory:
+The Meta-Department produces **Project Agent definitions** — standardized `.md` files stored in the project's `agents/` directory:
 
-- **13 atoms** (`.claude/agents/`) = abstract role templates, the Meta-Department's infrastructure
-- **Project Agents** (`agents/`) = concrete execution tools created by the Meta-Department for the specific project
-- Each Project Agent instantiates one or more atom roles (e.g., a PRD-Writer-Agent instantiates M09-compose)
-- Reuse priority: existing Project Agents are reused before creating new ones
-- The `agents/` directory is created on first `/meta` invocation; it does not exist until then
+| Concept | 13 Atoms | Project Agents |
+|---------|----------|---------------|
+| **Nature** | Abstract role templates | Project-specific execution tools |
+| **Location** | `.claude/agents/M##-xxx.md` | `agents/[Name]-Agent.md` |
+| **Created by** | Architecture designer (human) | Meta-Department (automatic) |
+| **Reuse scope** | Cross-project universal | Within-project reuse |
+
+The `agents/` directory is created on first `/meta` invocation and accumulates project-specific Agent definitions over time.
 
 ## Cross-Project Reuse
 
-When starting a new project, copy `.claude/agents/` (the 13 atoms + index). Do **not** copy `agents/` (project-specific Agents) or `.claude/memory/` — each project accumulates its own Agents and memory to maintain isolation.
+Copy `.claude/agents/` (13 atoms + index) to bootstrap a new project. Do **not** copy `agents/` (project-specific) or `.claude/memory/` — each project accumulates its own.
+
+## Skill Integration
+
+**Global resource discovery**: When M05 finds no matching project Agent in `agents/`, it searches global resources before creating new Agents. Matching global Skills/Agents are invoked directly (via Skill tool or M11-invoke), not wrapped in project Agent definitions.
+
+| External Skill | Integrated Into | Purpose |
+|---|---|---|
+| `find-skill` | M05 + M10 | Discover reusable patterns when capability gaps detected |
+| `skill-create` | M13 | Package validated new patterns into reusable skill modules |
+| `awesome-claude-prompts` | M09 + M02 + M10 | Prompt frameworks, identity methodology, template library |
+| Global `.claude/skills/` | M05 route | 14 superpowers skills, searched on capability gap |
+| Global `.claude/agents/` | M05 route | Global agents (e.g. code-reviewer), searched on capability gap |
+| `references/*/SKILL.md` | M05 route | Reference skill files, searched on capability gap |
 
 ## Reference Materials
 
-- `references/base/LaoJin_paper.pdf` — source paper defining 8 architectural principles and 10-phase workflow
+- `references/base/LaoJin_paper.pdf` — source paper (8 architectural principles, 10-phase workflow)
 - `references/base/2.png` — three-layer gravity structure visual
 - `references/base/1.png` — agent file structure reference
 - `references/` — also contains `agent-teams-playbook/`, `awesome-claude-prompts/`, `superpowers/` reference skills
