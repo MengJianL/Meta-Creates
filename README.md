@@ -92,35 +92,99 @@ A critical architectural distinction:
 3. **Self-Evolution** — Every atom has built-in feedback-driven adaptation
 4. **Orthogonality** — Clear boundaries, no functional overlap
 5. **Governance First** — Each atom answers: what am I, what am I not, how am I governed, how do I evolve
-6. **Evolvable Architecture** — M13 can create new Skills, Agents, and Meta-Departments
+6. **Evolvable Architecture** — M13 has five creation levels: Project Agents (L0), Skills (L1), Agents (L2), Meta-Departments (L3), and Governance-Aware Replication (L4)
 
-## M13: Three-Level Creation
+## Project Agent System
 
-M13 (Create) has **three-level creation capabilities**:
+The Meta-Department is a **"tool that creates tools"** (创造工具的工具). Its primary output is **Project Agent definitions** — standardized `.md` files stored in the project's `agents/` directory — not work deliverables. The department creates tools, then uses those tools to do work.
 
-| Level | What | Gate |
-|-------|------|------|
-| **Skill** | Reusable patterns & modules | 2x validation + clear I/O contract |
-| **Agent** | New atomic units with identity & evolution | 5-gate process (gap → skill insufficient → layer → orthogonality → human confirm) |
-| **Meta-Department** | Full 13-atom system instances | Lineage tracking + governance sync + independent evolution |
+### Three-Layer Tool Hierarchy
 
-Architecture safety valve: when total atoms exceed 18, an architecture review is triggered.
+```
+┌─────────────────────────────────────────────────┐
+│  Project Agent Definitions                        │  ← Tools created by Meta-Department
+│  Stored in agents/, reusable, iterable, cumulative │
+├─────────────────────────────────────────────────┤
+│  13 Atoms (.claude/agents/)                       │  ← Infrastructure for creating Agents
+│  Abstract role templates, not direct executors     │
+├─────────────────────────────────────────────────┤
+│  Claude Code Agent Tool                           │  ← Runtime execution mechanism
+│  Ephemeral subprocess, executes per Agent def      │
+└─────────────────────────────────────────────────┘
+```
+
+### Triple-Armed Agent Definitions
+
+Each Project Agent is **triple-armed** (Prompt + Skill + Tools) with a **9-section template**:
+
+1. **Identity** — Role positioning, domain expertise, decision authority
+2. **Atom Mapping** — Which M## atom(s) it instantiates
+3. **Input Contract** — Accepted formats, validation rules, prerequisites
+4. **Output Contract** — Normal output, failure reports, downstream receivers
+5. **Execution Protocol** — Imperative step-by-step procedure
+6. **Behavioral Constraints** — Must-do, must-not-do, context isolation
+7. **Quality Standards** — Quantified acceptance criteria, verification method
+8. **Skill Loadout** — Core and auxiliary skills (auto-matched from atom affinity tables)
+9. **Tool Priority** — Primary, auxiliary, and forbidden tools (auto-matched from atom tables)
+
+### Reuse-Before-Create Principle
+
+When routing tasks, M05 follows this priority chain:
+
+1. **Match in `agents/`** → Reuse existing Project Agent definition
+2. **Match in global resources** (`.claude/skills/`, `.claude/agents/`, `references/`) → Invoke directly via Skill tool
+3. **No match** → Create new Project Agent definition → Verify → Then execute
+4. **Partial match** → Update Agent definition version, record changes
+
+## M13: Five-Level Creation
+
+M13 (Create) has **five-level creation capabilities** (L0–L4):
+
+| Level | What | Storage | Gate |
+|-------|------|---------|------|
+| **L0: Project Agent** | Project-specific Agent definitions (most common) | `agents/` | No gate — standard Meta-Department output |
+| **L1: Skill** | Reusable patterns & modules | Internal | 2x validation + clear I/O contract |
+| **L2: Agent** | New atomic units with identity & evolution | `.claude/agents/` | 5-gate process (gap → skill insufficient → layer → orthogonality → human confirm) |
+| **L3: Meta-Department** | Full 13-atom system instances | Independent directory | Lineage tracking + governance sync + independent evolution |
+| **L4: Governance-Aware Replication** | Parent-child Meta-Department replication with version, inheritance, diff control, and governance synchronization | Independent directory | Not arbitrary replication — structurally governed expansion |
+
+L0 (Project Agent) is the most frequent creation act — on every task, the Meta-Department first creates or reuses Agent definitions in `agents/`, then dispatches execution according to those definitions. This embodies the core philosophy of "a tool that creates tools."
+
+### Architecture Safety Valves
+
+- **Atom count limit**: When total atoms exceed 18, an architecture review is triggered.
+- **M13 halt rules**: M13 includes a complete stop-rule system — creation at each level has explicit halt conditions to prevent runaway self-replication. Level escalation (e.g., L1→L2) requires demonstrating that the lower level is insufficient, not merely inconvenient.
+
+## Usage: The `/meta` Command
+
+The primary entry point for the Meta-Department is the **`/meta <task>`** slash command (defined in `.claude/commands/meta.md`). It orchestrates the full pipeline:
+
+1. **Intent Amplification** — Fuzzy tasks are expanded along three dimensions for user selection
+2. **Analysis** — Task decomposition (M04) and routing design (M05)
+3. **Agent Creation/Reuse** — Check `agents/` for existing definitions; create new ones if needed
+4. **Execution** — Dispatch Agents according to their definitions
+5. **Verification & Evaluation** — Independent M12 verify and M06 evaluate (separation of powers)
+6. **Delivery** — Synthesize results and deliver
+
+Hard gate-checks are enforced between phases. Standard/heavy tasks cannot enter execution without first completing Agent definition creation/reuse.
 
 ## Cross-Project Reuse
 
 To bootstrap a new project with the Meta-Department framework:
 
 ```bash
-# Copy the 13 atoms + index
+# Copy the 13 atoms + architecture index
 cp -r .claude/agents/ your-project/.claude/agents/
 
-# Do NOT copy memory — each project maintains isolation (M01 principle)
+# Do NOT copy agents/ — Project Agent definitions are project-specific
+# Do NOT copy .claude/memory/ — each project accumulates its own memory (M01 principle)
 ```
 
 ## Project Structure
 
 ```
 Meta-Creates/
+├── agents/                    # Project Agent definitions (created by Meta-Department)
 ├── .claude/
 │   ├── agents/                # 13 atoms + architecture index
 │   │   ├── CLAUDE.md          # Architecture index (总纲)

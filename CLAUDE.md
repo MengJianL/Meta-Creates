@@ -42,19 +42,20 @@ Defined in `.claude/commands/meta.md`.
 6. **Phase gate-checks** — `/meta` enforces hard gate-checks between phases. Standard/heavy tasks are forbidden from entering Phase C (execution) without first completing Phase B (creating/reusing project Agent definitions in `agents/`). See `meta.md` for the full ⛔ gate-check system.
 
 Full runtime binding table: `.claude/agents/CLAUDE.md` § 八
+M13 five-level creation system (L0 Project Agent → L4 Governance-Aware Replication): `.claude/agents/CLAUDE.md` § 十
 
 ## Atom File Conventions
 
 - **Naming**: `M##-[name].md` (e.g., `M04-decompose.md`)
-- **16-section template** (do not remove or reorder sections): Layer → Identity → Existential Role → Core Function → Operational Boundary → Trigger Conditions → Working Modes → Input Contract → Output Contract → Decision Principles → Failure Modes → Quality Criteria → Neighbor Interaction → Runtime Binding → Self-Evolution → Minimal Governance Statement
-- Optional Special Protocols: Escalation Ladder (M08), Human Channel Protocol (M03), Capability Gap Protocol (M05)
+- **15-section template** (do not remove or reorder sections): Layer → Identity (includes Existential Role) → Core Function → Operational Boundary → Trigger Conditions → Working Modes → Input Contract → Output Contract → Decision Principles → Failure Modes → Quality Criteria → Neighbor Interaction → Runtime Binding → Self-Evolution → Minimal Governance Statement
+- Optional Special Protocols: Escalation Ladder (M08), Human Channel Protocol (M03), Capability Gap Protocol (M05), and domain-specific protocols per atom
 - **Quality scale**: 0–5 per dimension (Accuracy, Completeness, Actionability, Format), 16/20 passing threshold
 - **Language**: bilingual Chinese/English
 - **Pure-abstract** — no domain-specific vocabulary, to ensure cross-domain reusability
 
 ## Project Agent System
 
-The Meta-Department produces **Project Agent definitions** — standardized `.md` files stored in the project's `agents/` directory:
+The Meta-Department produces **Project Agent definitions** — standardized `.md` files stored in the project's `agents/` directory. Each Agent is **triple-armed** (Prompt + Skill + Tools) with a **9-section template**: 身份定位 → 原子映射 → 输入契约 → 输出契约 → 执行规程 → 行为约束 → 质量标准 → 技能装备 → 工具优先级. Skill bindings and Tool priorities are auto-matched from atom affinity tables in `.claude/agents/CLAUDE.md` § 九.
 
 | Concept | 13 Atoms | Project Agents |
 |---------|----------|---------------|
@@ -75,8 +76,8 @@ Copy `.claude/agents/` (13 atoms + index) to bootstrap a new project. Do **not**
 
 | External Skill | Integrated Into | Purpose |
 |---|---|---|
-| `find-skill` | M05 + M10 | Discover reusable patterns when capability gaps detected |
-| `skill-create` | M13 | Package validated new patterns into reusable skill modules |
+| `find-skills` | M05 + M10 | Discover reusable patterns when capability gaps detected |
+| `writing-skills` | M13 | Package validated new patterns into reusable skill modules |
 | `awesome-claude-prompts` | M09 + M02 + M10 | Prompt frameworks, identity methodology, template library |
 | Global `.claude/skills/` | M05 route | 14 superpowers skills, searched on capability gap |
 | Global `.claude/agents/` | M05 route | Global agents (e.g. code-reviewer), searched on capability gap |
