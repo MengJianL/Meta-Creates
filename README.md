@@ -1,16 +1,16 @@
 <div align="center">
 
-# DreamMeta 梦元
+# DreamMeta
 
 **A 13-atom organizational architecture for autonomous AI agent governance**
 
-*"Governance cannot be absent — 协同可以扁平，治理不能缺位。"*
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Built%20with-Claude%20Code-blueviolet)](https://claude.ai/code)
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18957649-blue)](https://zenodo.org/records/18957649)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18957649-blue)](https://doi.org/10.5281/zenodo.18957649)
 
-[Paper](#references) · [Architecture](#architecture-three-layer-gravity-structure) · [Quick Start](#quick-start) · [13 Atoms](#the-13-atoms) · [Contributing](#contributing)
+[Architecture](#architecture) · [Quick Start](#quick-start) · [13 Atoms](#the-13-atoms) · [Agents](#project-agent-system) · [Contributing](#contributing)
+
+**[中文版](README.zh-CN.md)**
 
 </div>
 
@@ -18,16 +18,16 @@
 
 ## What is DreamMeta?
 
-DreamMeta is a **Meta-Department (元部门)** — an organizational pattern for AI agent systems inspired by real-world corporate structures. Instead of monolithic prompts or ad-hoc agent chains, it decomposes agent coordination into **13 irreducible atomic units** arranged in a three-layer gravity structure.
+DreamMeta is a **Meta-Department** — an organizational pattern for AI agent systems inspired by real-world corporate structures. Instead of monolithic prompts or ad-hoc agent chains, it decomposes agent coordination into **13 irreducible atomic units** arranged in a three-layer gravity structure.
 
-The Meta-Department is a **"tool that creates tools"** (创造工具的工具). Its primary output is **Project Agent definitions**, not work deliverables — the department creates tools, then uses those tools to do work.
+The Meta-Department is a **"tool that creates tools"**. Its primary output is **Project Agent definitions**, not work deliverables — the department creates tools, then uses those tools to do work.
 
 ### Why DreamMeta?
 
 - **Governance-first** — Every atom answers: what am I, what am I not, how am I governed, how do I evolve
 - **Pure-abstract** — No domain-specific vocabulary; drop into any project and it works
 - **Self-evolving** — Built-in feedback loops, scar protocols, and evolution writeback at every layer
-- **Separation of powers** — Execution, verification, and evaluation are structurally isolated (三权分立)
+- **Separation of powers** — Execution, verification, and evaluation are structurally isolated
 - **Five-level creation** — From project agents (L0) to full meta-department replication (L4)
 
 > [!NOTE]
@@ -35,7 +35,7 @@ The Meta-Department is a **"tool that creates tools"** (创造工具的工具). 
 
 ## Quick Start
 
-### 1. Bootstrap a new project
+### 1. Bootstrap a New Project
 
 ```bash
 # Copy the 13 atoms + architecture index into your project
@@ -68,19 +68,21 @@ npm run mcp:start
 
 Exposes `list_atoms` and `get_atom` tools for programmatic access to the 13-atom architecture.
 
-## Architecture: Three-Layer Gravity Structure
+## Architecture
+
+### Three-Layer Gravity Structure
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│  Layer 3 — Execution                                            │
+┌─────────────────────────────────────────────────────────────────────┐
+│  Layer 3 — Execution                                                │
 │  M09 Compose · M10 Retrieve · M11 Invoke · M12 Verify · M13 Create │
-├─────────────────────────────────────────────────────────────────┤
-│  Layer 2 — Orchestration                                        │
+├─────────────────────────────────────────────────────────────────────┤
+│  Layer 2 — Orchestration                                            │
 │  M04 Decompose · M05 Route · M06 Evaluate · M07 Synthesize · M08 Sequence │
-├─────────────────────────────────────────────────────────────────┤
-│  Layer 1 — Foundation                                           │
-│  M01 Memory · M02 Identity · M03 Channel                        │
-└─────────────────────────────────────────────────────────────────┘
+├─────────────────────────────────────────────────────────────────────┤
+│  Layer 1 — Foundation                                               │
+│  M01 Memory · M02 Identity · M03 Channel                            │
+└─────────────────────────────────────────────────────────────────────┘
 ```
 
 | Layer | Role | Atoms |
@@ -105,24 +107,24 @@ Exposes `list_atoms` and `get_atom` tools for programmatic access to the 13-atom
 
 | # | Atom | Layer | Core Responsibility |
 |---|------|-------|---------------------|
-| M01 | **Memory** 记忆元 | Foundation | Layered storage, compression, scar protocol |
-| M02 | **Identity** 身份元 | Foundation | Role boundaries, behavioral constraints, capability profiles |
-| M03 | **Channel** 通信元 | Foundation | Inter-layer information flow and filtering |
-| M04 | **Decompose** 分解元 | Orchestration | Intent amplification and task decomposition |
-| M05 | **Route** 路由元 | Orchestration | Capability-matched routing + reuse-before-create |
-| M06 | **Evaluate** 评估元 | Orchestration | Multi-dimensional quality assessment + meta-review |
-| M07 | **Synthesize** 聚合元 | Orchestration | Multi-source integration and conflict resolution |
-| M08 | **Sequence** 序列元 | Orchestration | Pipeline orchestration and attention cost management |
-| M09 | **Compose** 构成元 | Execution | Compose candidate content under constraints |
-| M10 | **Retrieve** 检索元 | Execution | Locate and extract contextually relevant information |
-| M11 | **Invoke** 调用元 | Execution | Trigger external tools/APIs and process results |
-| M12 | **Verify** 验证元 | Execution | Constraint verification, anti-SLOP detection, gate decisions |
-| M13 | **Create** 创造元 | Execution | Pattern recombination, agent creation (L0–L4) |
+| M01 | **Memory** | Foundation | Layered storage, compression, scar protocol |
+| M02 | **Identity** | Foundation | Role boundaries, behavioral constraints, capability profiles |
+| M03 | **Channel** | Foundation | Inter-layer information flow and filtering |
+| M04 | **Decompose** | Orchestration | Intent amplification and task decomposition |
+| M05 | **Route** | Orchestration | Capability-matched routing, reuse-before-create |
+| M06 | **Evaluate** | Orchestration | Multi-dimensional quality assessment, meta-review |
+| M07 | **Synthesize** | Orchestration | Multi-source integration and conflict resolution |
+| M08 | **Sequence** | Orchestration | Pipeline orchestration and attention cost management |
+| M09 | **Compose** | Execution | Compose candidate content under constraints |
+| M10 | **Retrieve** | Execution | Locate and extract contextually relevant information |
+| M11 | **Invoke** | Execution | Trigger external tools/APIs and process results |
+| M12 | **Verify** | Execution | Constraint verification, anti-SLOP detection, gate decisions |
+| M13 | **Create** | Execution | Pattern recombination, agent creation (L0–L4) |
 
 ### Five Core Chains
 
 ```
-Standard Task:       M03 → M04 → M05 → M08 → M09/M10/M11 → M12 → M06 → M07 → M03
+Standard Task:        M03 → M04 → M05 → M08 → M09/M10/M11 → M12 → M06 → M07 → M03
 Candidate Generation: M04 → M05 → M09 → M12 → M06 → M07
 Retrieval & Reuse:    M04/M05 → M10 → M12/M06 → M07
 External Capability:  M05 → M11 → M12 → M06 → M07
@@ -152,17 +154,17 @@ Each Project Agent is **triple-armed** (Prompt + Skill + Tools) with a **9-secti
 
 ### Routing Priority (M05)
 
-1. **Match in `agents/`** → Reuse existing Project Agent
-2. **Match in global resources** → Invoke directly via Skill tool
-3. **No match** → Create new Agent → Verify → Execute
-4. **Partial match** → Update Agent version
+1. **Match in `agents/`** — Reuse existing Project Agent
+2. **Match in global resources** — Invoke directly via Skill tool
+3. **No match** — Create new Agent, verify, then execute
+4. **Partial match** — Update Agent version
 
 ## M13: Five-Level Creation
 
 | Level | Creates | Gate Control |
 |-------|---------|-------------|
 | **L0** Project Agent | Task-specific agent definitions | None — standard output |
-| **L1** Skill | Reusable patterns & modules | 2x validation |
+| **L1** Skill | Reusable patterns and modules | 2x validation |
 | **L2** Agent | New atomic units with identity | 5-gate process |
 | **L3** Meta-Department | Full 13-atom system instances | Lineage tracking |
 | **L4** Governance-Aware Replication | Parent-child meta-departments | Structural governance |
@@ -208,26 +210,22 @@ cp -r .claude/commands/ your-project/.claude/commands/
 
 ## Contributing
 
-Contributions are welcome! Areas of interest:
+Contributions are welcome. Areas of interest:
 
 - **New atom proposals** — Must pass the irreducibility and orthogonality tests
 - **Project Agent definitions** — Share reusable agent patterns
 - **MCP server extensions** — New tools for programmatic architecture access
 - **Cross-domain validation** — Test the framework in different project types
 
-## References
-
-> Meng Jian, Jin Zhongxu. *AI Agent Multi-Agent Collaboration Architecture Design Based on "Organizational Mirroring" Theory*. Zenodo, 2025.
->
-> 孟健, 金仲旭. *基于"组织镜像"理论的AI智能体多Agent协作架构设计*. Zenodo, 2025.
-
-**DOI**: [10.5281/zenodo.18957649](https://zenodo.org/records/18957649)
-
 ## Acknowledgments
 
-- **[KimYx0207](https://github.com/KimYx0207)** — Invaluable contributions, scar protocol inspiration, reference architecture ([Meta_Kim](references/Meta_Kim-v20260403/))
+- **[KimYx0207](https://github.com/KimYx0207)** — Scar protocol inspiration, reference architecture ([Meta_Kim](references/Meta_Kim-v20260406/))
 - **[Claude](https://claude.ai)** (Anthropic) — Architecture co-design, documentation, implementation
 - **[ChatGPT](https://chatgpt.com)** (OpenAI) — Architecture co-design, documentation, implementation
+
+## References
+
+> Jin, Yongxun. *From One Directive to Full-Organization Action: Organizational Mirroring for Multi-Agent LLM Systems*. Zenodo, 2025. DOI: [10.5281/zenodo.18957649](https://doi.org/10.5281/zenodo.18957649)
 
 ## License
 
