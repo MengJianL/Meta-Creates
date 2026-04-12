@@ -458,7 +458,7 @@ scar:
 2. **记录 / Record**：由元部门通过 M01 将伤疤写入 `memory/scars/{id}.md`
 3. **分类 / Classify**：确定 `type` 和 `impact`
 4. **触发规则更新 / Trigger Rule Update**：若 `impact: recovered | critical`，触发相关原子定义或治理规则的更新审视
-5. **后续任务审计 / Audit**：在未来任务的核验阶段，扫描 `memory/scars/` 检查是否存在相关历史伤疤
+5. **后续任务审计 / Audit**：在未来任务的核验阶段，扫描项目 `memory/scars/` **和**全局 `~/.claude/scars/` 检查是否存在相关历史伤疤
 
 **存储位置 / Storage**：
 ```
@@ -466,6 +466,19 @@ memory/
 └── scars/
     └── {YYYY-MM}-{type}-{short-desc}.md
 ```
+
+**全局伤疤存储 / Global Scar Storage**（当元部门全局部署时生效）：
+```
+~/.claude/
+└── scars/
+    └── {YYYY-MM}-{type}-{short-desc}.md
+```
+
+全局伤疤是从项目伤疤中筛选出的跨项目普适性失败记录。全局伤疤可被所有项目的 C2 伤疤审计步骤扫描。
+
+**项目伤疤 vs 全局伤疤判定**：
+- 伤疤的 `triggered_by` 和 `prevention_rule` 不含项目特定路径、项目特定 Agent 名称、项目特定业务逻辑 → **全局伤疤**，同时写入项目 `memory/scars/` 和全局 `~/.claude/scars/`
+- 伤疤包含项目特定上下文 → **项目伤疤**，仅写入项目 `memory/scars/`
 
 **与 M01 其他记忆类别的关系**：伤疤属于「异常记忆 / Exception Memory」的一个特殊子类，但其生命周期更严格——伤疤是**永久性**记录，不适用常规的老化（Aging）或退役（Retirement）机制。伤疤只能被标记为「已缓解」（prevention_rule 已生效），但不能被删除。
 

@@ -8,7 +8,7 @@
 [![Claude Code](https://img.shields.io/badge/Built%20with-Claude%20Code-blueviolet)](https://claude.ai/code)
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18957649-blue)](https://doi.org/10.5281/zenodo.18957649)
 
-[架构](#架构) · [快速开始](#快速开始) · [13 原子](#13-原子) · [项目-Agent](#项目-agent-体系) · [参与贡献](#参与贡献)
+[架构](#架构) · [快速开始](#快速开始) · [13 原子](#13-原子) · [项目-Agent](#项目-agent-体系)
 
 **[English](README.md)**
 
@@ -207,15 +207,6 @@ cp -r .claude/commands/ your-project/.claude/commands/
 # - agents/          → 项目专属，各项目独立积累
 # - .claude/memory/  → 各项目拥有独立记忆（M01 原则）
 ```
-
-## 参与贡献
-
-欢迎贡献，以下方向尤其欢迎：
-
-- **新原子提案** — 须通过不可约性与正交性测试
-- **项目 Agent 定义** — 分享可复用的 Agent 模式
-- **MCP 服务器扩展** — 程序化架构访问的新工具
-- **跨领域验证** — 在不同类型项目中测试本框架
 
 ## 致谢
 

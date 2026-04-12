@@ -235,7 +235,36 @@ M05 应显式对比候选路径，再作出归属决定。
 2. 搜索全局 `.claude/agents/` 目录——查找可通过 Agent tool 直接调用的 Agent
 3. 搜索项目 `references/` 目录中的 `SKILL.md` 文件——查找可参考或调用的参考技能
 
+4. 搜索全局 `~/.claude/agent-registry/` 目录——查找其他项目注册的可复用 Agent 定义摘要
+
 **调用方式**：匹配到的全局资源通过 Skill tool 或 M11-invoke 直接调用，**不创建**项目 Agent 包装文件。这些全局资源是共享基础设施，不属于单个项目。
+
+**跨项目 Agent 发现协议 / Cross-Project Agent Discovery Protocol**：
+
+> 当元部门部署为全局时，优秀的项目 Agent 可通过注册机制被其他项目发现和复用。
+
+**注册机制**：项目可在 D3 进化落盘阶段将验证有效（评估 ≥ 16/20）且具有跨项目复用价值的 Agent 定义注册到全局 `~/.claude/agent-registry/`。注册文件为摘要格式（非完整定义），包含：
+
+```yaml
+# ~/.claude/agent-registry/{agent-name}.yml
+name: "[Agent 名称]"
+source_project: "[源项目路径]"
+atom: "[M##-xxx]"
+description: "[一句话功能描述]"
+tags: ["tag1", "tag2"]
+definition_path: "[完整 Agent 定义文件的绝对路径]"
+registered: "YYYY-MM-DD"
+quality_score: "XX/20"
+```
+
+**发现流程**：M05 在 Step 2.5 中搜索 `~/.claude/agent-registry/` 时：
+1. 扫描所有 `.yml` 文件，基于 `tags` 和 `description` 匹配当前任务需求
+2. 有匹配 → 读取 `definition_path` 指向的完整 Agent 定义文件
+3. 检查定义是否适用于当前项目上下文（可能需要微调）
+4. 适用 → 复制到当前项目 `agents/` 并标记来源；需微调 → 复制后调整 version
+5. 无匹配 → 继续 Step 3（Skill Discovery）
+
+**⛔ 约束**：跨项目 Agent 发现是辅助机制，不替代项目自身的 Agent 创建。注册到全局的 Agent 摘要不包含项目敏感信息。
 
 ### Step 3: Skill Discovery Trigger / 技能发现触发
 
@@ -421,7 +450,7 @@ M05 可以判断"应走检索路径"或"应走调用路径"，但不替代检索
 - 路由到独立评估时，**必须**确保评估实体与执行实体上下文隔离
 - **仅微型任务**（单一明确操作、文件≤1、变更≤10行、无需核验评估）允许不显式调用独立执行实体
 - 路由前**必须**读取项目的 `agents/` 目录（若存在），检查是否有可复用的 Agent 定义匹配当前任务需求，避免重复创建功能相近的执行实体
-- 项目 `agents/` 无匹配时，**必须**搜索全局资源（`.claude/skills/`、`.claude/agents/`、`references/` 中的 SKILL.md），匹配到的全局资源通过 Skill tool 或 M11-invoke 直接调用，不创建项目 Agent 包装
+- 项目 `agents/` 无匹配时，**必须**搜索全局资源（`.claude/skills/`、`.claude/agents/`、`~/.claude/agent-registry/`、`references/` 中的 SKILL.md），匹配到的全局资源通过 Skill tool 或 M11-invoke 直接调用，不创建项目 Agent 包装
 
 M05 不是"口头说应当委派"，而**必须**在运行层面形成真正的接管关系。有任何疑问即升级为标准模式，构建 Agent 团队执行。
 

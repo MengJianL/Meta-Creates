@@ -8,7 +8,7 @@
 [![Claude Code](https://img.shields.io/badge/Built%20with-Claude%20Code-blueviolet)](https://claude.ai/code)
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18957649-blue)](https://doi.org/10.5281/zenodo.18957649)
 
-[Architecture](#architecture) · [Quick Start](#quick-start) · [13 Atoms](#the-13-atoms) · [Agents](#project-agent-system) · [Contributing](#contributing)
+[Architecture](#architecture) · [Quick Start](#quick-start) · [13 Atoms](#the-13-atoms) · [Agents](#project-agent-system)
 
 **[中文版](README.zh-CN.md)**
 
@@ -207,15 +207,6 @@ cp -r .claude/commands/ your-project/.claude/commands/
 # - agents/          → project-specific, accumulates its own
 # - .claude/memory/  → each project has its own memory (M01 principle)
 ```
-
-## Contributing
-
-Contributions are welcome. Areas of interest:
-
-- **New atom proposals** — Must pass the irreducibility and orthogonality tests
-- **Project Agent definitions** — Share reusable agent patterns
-- **MCP server extensions** — New tools for programmatic architecture access
-- **Cross-domain validation** — Test the framework in different project types
 
 ## Acknowledgments
 

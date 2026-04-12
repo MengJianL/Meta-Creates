@@ -88,4 +88,5 @@ Copy `.claude/agents/` (13 atoms + index) to bootstrap a new project. Do **not**
 - `references/base/LaoJin_paper.pdf` — source paper (8 architectural principles, 10-phase workflow)
 - `references/base/2.png` — three-layer gravity structure visual
 - `references/base/1.png` — agent file structure reference
-- `references/` — also contains `agent-teams-playbook/`, `awesome-claude-prompts/`, `superpowers/` reference skills
+- `references/` — also contains `agent-teams-playbook/`, `awesome-claude-prompts/`, `superpowers/`, `Vibe-Skills-v20260411/` reference skills
+- `references/Vibe-Skills-v20260411/` — governed runtime framework (selective snapshot): 7 transferable patterns (closure-first, anti-drift, delegation envelope, execution grading, evidence-based communication, skill contract schema, 6-stage state machine). See `DREAMMETA-STUDY.md` for mapping to DreamMeta atoms.

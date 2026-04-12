@@ -577,7 +577,37 @@ M13 具备**五级创造能力**：
 
 ---
 
-## 十三、统一术语约束
+## 十三、跨项目治理 / Cross-Project Governance
+
+> 当元部门部署为全局（`~/.claude/`）时，以下机制确保跨项目经验的有效流通与安全隔离。
+
+### 全局伤疤池 / Global Scar Pool
+
+全局路径 `~/.claude/scars/` 存储跨项目普适性伤疤。每个项目的 C2 伤疤审计步骤同时扫描项目 `memory/scars/` 和全局 `~/.claude/scars/`。伤疤的全局化由 D3 进化落盘阶段判定（不含项目特定上下文 → 全局化）。
+
+### 全局进化门控 / Global Evolution Gating
+
+任何对 `~/.claude/` 下文件的修改必须经用户确认。D3 进化写回区分项目级（直接写入项目目录）与全局级（需用户确认后写入 `~/.claude/`）。
+
+### 跨项目 Agent 发现 / Cross-Project Agent Discovery
+
+全局 `~/.claude/agent-registry/` 存储各项目注册的可复用 Agent 摘要（`.yml` 格式）。M05 在 Step 2.5 全局资源搜索中扫描此注册表，发现匹配后复制到当前项目 `agents/` 并标记来源。注册条件：Agent 评估 ≥ 16/20 且具有跨项目复用价值。
+
+### 全局 vs 项目级资产对照 / Global vs Project-Level Assets
+
+| 资产类型 | 全局路径 (`~/.claude/`) | 项目路径 | 说明 |
+|---------|----------------------|---------|------|
+| 原子定义 | `agents/M##-xxx.md` | — | 全局共享，跨项目通用 |
+| 治理链 | `commands/meta.md` | — | 全局共享 |
+| 项目 Agent | — | `agents/*.md` | 项目独立，不自动共享 |
+| Agent 注册表 | `agent-registry/*.yml` | — | 项目 Agent 的跨项目发现索引 |
+| 伤疤 | `scars/*.md` | `memory/scars/*.md` | 全局=普适性伤疤，项目=含项目上下文的伤疤 |
+| 记忆 | — | `memory/` | 项目独立，不跨项目 |
+| MCP server | `scripts/mcp/` | — | 全局服务 |
+
+---
+
+## 十四、统一术语约束
 
 | 术语 | 归属原子 | 禁止混用 |
 |------|---------|---------|
